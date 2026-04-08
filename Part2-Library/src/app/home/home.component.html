@@ -1,0 +1,33 @@
+<h2>Home - Manage Books</h2>
+
+<div class="form-card">
+  <h3>Add New Book</h3>
+  <input [(ngModel)]="newBook.title" placeholder="Book Title">
+  <input [(ngModel)]="newBook.author" placeholder="Author">
+  <input [(ngModel)]="newBook.year" type="number" placeholder="Publication Year">
+  <button (click)="addBook()">Add Book</button>
+</div>
+
+<div class="table-card">
+  <h3>Book List</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Year</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td>{{ book.id }}</td>
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.year }}</td>
+        <td><button class="btn-delete" (click)="deleteBook(book.id)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
