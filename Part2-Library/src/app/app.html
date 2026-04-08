@@ -1,0 +1,66 @@
+<nav class="navbar">
+  <div class="logo">Library System</div>
+  <div class="nav-links">
+    <a (click)="navigate('/')">Home</a>
+    <a (click)="navigate('/search')">Search</a>
+    <a (click)="navigate('/privacy')">Privacy</a>
+    <a (click)="navigate('/help')">Help</a>
+  </div>
+</nav>
+
+<div class="page-container">
+
+  <div *ngIf="currentRoute === ''">
+    <h2>Home - Library Management</h2>
+
+    <div class="form-card">
+      <h3>Add New Book</h3>
+      <input [(ngModel)]="newBook.title" placeholder="Book Title">
+      <input [(ngModel)]="newBook.author" placeholder="Author">
+      <input [(ngModel)]="newBook.year" type="number" placeholder="Year">
+      <button (click)="addBook()">Add Book</button>
+    </div>
+
+    <div class="book-list">
+      <h3>Book Collection</h3>
+      <div *ngFor="let book of books" class="book-item">
+        <span>{{ book.id }}</span>
+        <span>{{ book.title }}</span>
+        <span>{{ book.author }}</span>
+        <span>Qty: {{ book.quantity }}</span>
+        <button class="qty-btn" (click)="decreaseQuantity(book.id)">-</button>
+        <button class="qty-btn" (click)="increaseQuantity(book.id)">+</button>
+        <button class="del-btn" (click)="deleteBook(book.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="currentRoute === '/search'">
+    <h2>Search Books</h2>
+    <input [(ngModel)]="searchKeyword" placeholder="Search by title or author">
+    <button (click)="searchBooks()">Search</button>
+
+    <div class="results">
+      <div *ngFor="let book of filteredBooks" class="result-item">
+        {{ book.title }} by {{ book.author }} ({{ book.year }}) | Qty: {{ book.quantity }}
+      </div>
+      <div *ngIf="filteredBooks.length === 0">No results.</div>
+    </div>
+  </div>
+
+  <div *ngIf="currentRoute === '/privacy'">
+    <h2>Privacy & Security</h2>
+    <p>All data is stored locally in your browser.</p>
+    <p>No data is sent to external servers.</p>
+    <p>Your information stays private.</p>
+  </div>
+
+  <div *ngIf="currentRoute === '/help'">
+    <h2>Help & Guide</h2>
+    <p>1. Use Home to add or delete books.</p>
+    <p>2. Use Search to find books quickly.</p>
+    <p>3. Use +/- to adjust quantity.</p>
+    <p>4. All data is saved locally on your device.</p>
+  </div>
+
+</div>
